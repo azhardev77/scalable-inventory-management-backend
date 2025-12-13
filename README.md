@@ -69,7 +69,7 @@ src/main/java/com/azhar/inventory
 
 ### Prerequisites
 
-* Java 17+
+* Java 21 LTS
 * Maven
 * MySQL
 
@@ -118,3 +118,4 @@ Common interview topics covered:
 Backend Software Engineer (Java | Spring Boot)
 
 🔗 GitHub: [https://github.com/azhardev77](https://github.com/azhardev77)
+
