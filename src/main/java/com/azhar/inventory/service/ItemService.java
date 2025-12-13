@@ -1,65 +1,41 @@
 package com.azhar.inventory.service;
 
+import com.azhar.inventory.model.Item;
+import com.azhar.inventory.repository.ItemRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
-        public Item createItem(Item item) {
-        return itemRepository.save(item);
-        }
+@Service
+public class ItemService {
 
+    private final ItemRepository itemRepository;
 
-        public Page<Item> getAllItems(int page, int size) {
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    public Page<Item> getAllItems(int page, int size) {
         return itemRepository.findAll(PageRequest.of(page, size));
+    }
+
+    public Item createItem(Item item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
         }
-
-
-        public Item getItemById(Long id) {
-        return itemRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
-        }
-
-
-        public Item updateItem(Long id, Item updatedItem) {
-        Item existing = getItemById(id);
-        existing.setName(updatedItem.getName());
-        existing.setQuantity(updatedItem.getQuantity());
-        existing.setPrice(updatedItem.getPrice());
-        return itemRepository.save(existing);
-        }
-
-
-        public void deleteItem(Long id) {
-        if (!itemRepository.existsById(id)) {
-        throw new ResourceNotFoundException("Item not found with id: " + id);
-        }
-        itemRepository.deleteById(id);
-        }
-
-
-
-        public Item createItem(Item item) {
         return itemRepository.save(item);
-        }
+    }
 
-
-        public List<Item> getAllItems() {
-        return itemRepository.findAll();
-        }
-
-
-        public Item getItemById(Long id) {
+    public Item getItemById(Long id) {
         return itemRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Item not found"));
-        }
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+    }
 
-
-        public Item updateItem(Long id, Item updatedItem) {
-        Item existing = getItemById(id);
-        existing.setName(updatedItem.getName());
-        existing.setQuantity(updatedItem.getQuantity());
-        existing.setPrice(updatedItem.getPrice());
-        return itemRepository.save(existing);
-        }
-
-
-        public void deleteItem(Long id) {
+    public Item updateItem(Long id, Item item) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    public void deleteItem(Long id) {
         itemRepository.deleteById(id);
+    }   
+
 }
